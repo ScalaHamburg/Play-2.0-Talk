@@ -1,9 +1,15 @@
 package controllers
 
-import play.api.mvc.{Controller, Action}
+import models.Visitor
+import play.api.mvc.{ Controller, Action }
 
 object HelloWorld extends Controller {
-	def helloPlay = Action {
-	  Ok(views.html.simple())
-	}
+  def helloPlay(name: String) = Action {
+    Visitor.add("Java")
+    Visitor.add("Play Framework")
+    Visitor.add("Scala")
+    val recentNames = Visitor.recentNames()
+    Visitor.add(name)
+    Ok(views.html.simple(name, recentNames))
+  }
 }

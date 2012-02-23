@@ -1,9 +1,20 @@
+@(name: String, visitors: Option[List[String]])
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Hello World!</title>
 </head>
 <body>
-	Hello there, Play 2.0!
+	<p>Hello there, @name!<p>
+	@visitors match {
+		case Some(list) => {
+			<p>Today I've seen:</p>
+			<ul>@list.map { visitor => <li>@visitor</li> }</ul>
+		}
+		case None => {
+			<p>Nothing happened so far.</p>
+		}
+	}
+	<p><img src="@routes.Assets.at("scala-hamburg.png")" /></p>
 </body>
 </html>
